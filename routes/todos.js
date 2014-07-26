@@ -5,13 +5,14 @@ var express = require('express'),
 /* GET todos listing. */
 router.get('/', function (req, res) {
     Todo.list(function(todos){
-        console.log("data : "+todos.length);
-        res.render('index', { title: 'Express',todos:todos });
+        res.render('index', { title: 'Express',todos:todos});
     })
 });
 
 router.get('/create', function (req, res) {
-
+    Todo.list(function(todos){
+        res.render('index', { title: 'Express',todos:todos });
+    })
 });
 
 router.post('/save', function (req, res) {
