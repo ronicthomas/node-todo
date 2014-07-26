@@ -4,14 +4,10 @@
 
         <div class="panel-body no-margin">
             <ul class="nav nav-pills nav-stacked" id="sub-menu-sports">
-                <%if(todos.length>0){
-                    
-                }else{ %>
-                    <li id="mi-info">
-                        <a href="#">No records found
-                        </a>
-                    </li>
-                <%} %>
+                <% for(var i=0; i < todos.length; i++) {%>
+                <li id="mi-info">
+                    <a href="/todos/show?id=<%= todos[i].id %>"><%= todos[i].title %></a></li>
+                <% } %>
 
             </ul>
         </div>
@@ -27,7 +23,7 @@
             </ul>
         </div>
 
-        <form action="#">
+        <form action="/todos/save" method="post">
         <div class="panel-body no-margin">
             <div class="form-group ">
                 <label for="title" class="control-label col-sm-3">

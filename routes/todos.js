@@ -5,7 +5,7 @@ var express = require('express'),
 /* GET todos listing. */
 router.get('/', function (req, res) {
     Todo.list(function(todos){
-        console.log("data : "+todos.length)
+        console.log("data : "+todos.length);
         res.render('index', { title: 'Express',todos:todos });
     })
 });
@@ -14,7 +14,11 @@ router.get('/create', function (req, res) {
 
 });
 
-router.post('/save/:id', function (req, res) {
+router.post('/save', function (req, res) {
+    Todo.create(req.body).success(function(){
+        console.log("Todo created");
+        res.redirect('/');
+    });
 
 });
 

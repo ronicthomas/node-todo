@@ -6,7 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var partials = require('express-partials');
 require('./domains');
-
+var routes = require('./routes/todos');
 var app = express();
 
 // view engine setup
@@ -22,7 +22,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(partials());
 
-app.use('/', require('./routes/todos'));
+app.use('/', routes);
+app.use('/todos', routes);
 
 /// catch 404 and forwarding to error handler
 app.use(function (req, res, next) {
