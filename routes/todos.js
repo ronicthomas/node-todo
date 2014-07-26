@@ -5,26 +5,37 @@ var express = require('express'),
 /* GET todos listing. */
 router.get('/', function (req, res) {
     Todo.list(function(todos){
-        res.render('index', { title: 'Express',todos:todos});
+        res.render('index', { title: 'Express',todos:todos,todo:{title:'',description:'',id:''}});
     })
 });
 
 router.get('/create', function (req, res) {
     Todo.list(function(todos){
-        res.render('index', { title: 'Express',todos:todos });
+        var id = req.param('id');
+        if(id){
+            Todo.find({id:id}).success(function(todo){
+                res.render('index', { title: 'Express',todos:todos,todo:todo});
+            })
+        }else{
+            res.render('index', { title: 'Express',todos:todos,todo:{title:'',description:'',id:''}});
+        }
+
     })
 });
 
 router.post('/save', function (req, res) {
     Todo.create(req.body).success(function(){
-        console.log("Todo created");
         res.redirect('/');
     });
 
 });
 
-router.delete('/delete/:id', function () {
-
+router.get('/delete', function (req, res) {
+    Todo.find(req.param('id')).on('success', function(todo) {
+        todo.destroy().on('success', function(u) {
+            res.redirect('/');
+        })
+    })
 });
 
 
