@@ -19,7 +19,12 @@
 </div>
 <div class="col-md-9">
     <div class="panel panel-default">
-        <div class="panel-heading" data-toggle="tooltip" data-placement="left" title="Create">Create Todo
+        <div class="panel-heading" data-toggle="tooltip" data-placement="left" title="Create">
+            <%if(todo.id){%>
+            Update
+            <%}else{%>
+            Create
+            <%}%> Todo
             <ul id="headbar-menu" class="pull-right">
                 <li>
                     <a href="/" class="create" title="Create Todo">&nbsp;Add Todo</a>
