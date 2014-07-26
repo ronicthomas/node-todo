@@ -4,11 +4,14 @@
 
         <div class="panel-body no-margin">
             <ul class="nav nav-pills nav-stacked" id="sub-menu-sports">
-                <li id="mi-info">
-                    <a href="#">Basic Information
-
-                    </a>
-                </li>
+                <%if(todos.length>0){
+                    
+                }else{ %>
+                    <li id="mi-info">
+                        <a href="#">No records found
+                        </a>
+                    </li>
+                <%} %>
 
             </ul>
         </div>
@@ -44,8 +47,8 @@
                 </label>
 
                 <div class="col-sm-9">
-                    <input type="text" name="description" value="" class="form-control" required="required"
-                           id="description">
+                    <textarea name="description"  class="form-control" cols="50" rows="10"
+                           id="description"></textarea>
                 </div>
             </div>
         </div>
