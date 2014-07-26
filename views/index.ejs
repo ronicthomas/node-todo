@@ -55,7 +55,7 @@
         </div>
             <div class="panel-footer">
                 <%if(todo.id){%>
-                <input type="submit" name="update" class="save btn btn-primary" value="Create" id="create">
+                <input type="submit" name="update" class="save btn btn-primary" value="Update" id="create">
                 <a href="/todos/delete?id=<%= todo.id %>" class="btn btn-danger" name="cancel">Delete</a>
                 <%}else{%>
                 <input type="submit" name="create" class="save btn btn-primary" value="Create" id="create">
