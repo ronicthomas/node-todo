@@ -4,12 +4,16 @@
 
         <div class="panel-body no-margin">
             <ul class="nav nav-pills nav-stacked" id="sub-menu-sports">
-                <%if(todos.length <=0){%>
-                <li id="mi-info"><a href="#"> No data found</a></li>
-                <%}else {%>
-                <% for(var i=0; i < todos.length; i++) {%>
-                <li id="mi-info">
-                    <a href="/todos/create?id=<%= todos[i].id %>"><%= todos[i].title %></a></li>
+                <% if(todos.length <= 0){ %>
+                        <li id="mi-info"><a href="#"> No data found</a></li>
+                <% }else {
+                     for(var i = 0; i < todos.length; i++) {
+                        if(todos[i].id == todo.id){ %>
+                            <li id="mi-info" class="active">
+                    <% }else{ %>
+                            <li id="mi-info">
+                    <% } %>
+                            <a href="/todos/create?id=<%= todos[i].id %>"><%= todos[i].title %></a></li>
                 <% }  } %>
 
             </ul>
@@ -19,11 +23,12 @@
 <div class="col-md-9">
     <div class="panel panel-default">
         <div class="panel-heading" data-toggle="tooltip" data-placement="left" title="Create">
-            <%if(todo.id){%>
+            <% if(todo.id){ %>
             Update
-            <%}else{%>
+            <% }else{ %>
             Create
-            <%}%> Todo
+            <% } %>
+            Todo
             <ul id="headbar-menu" class="pull-right" style="list-style: none">
                 <li>
                     <a href="/" class="create" title="Create Todo"><i class="fa fa-plus fa-1g"></i>&nbsp;Add Todo</a>
@@ -33,37 +38,39 @@
 
         <form action="/todos/save" method="post">
             <input type="hidden" value="<%= todo.id %>" name="id"/>
-        <div class="panel-body no-margin">
-            <div class="form-group ">
-                <label for="title" class="control-label col-sm-3">
-                    Title
-                    <span class="required-indicator">*</span>
 
-                </label>
+            <div class="panel-body no-margin">
+                <div class="form-group ">
+                    <label for="title" class="control-label col-sm-3">
+                        Title
+                        <span class="required-indicator">*</span>
 
-                <div class="col-sm-9">
-                    <input type="text" name="title" value="<%= todo.title %>" class="form-control" required="required" id="title">
+                    </label>
+
+                    <div class="col-sm-9">
+                        <input type="text" name="title" value="<%= todo.title %>" class="form-control"
+                               required="required" id="title">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="description" class="control-label col-sm-3">
+                        Description
+                    </label>
+
+                    <div class="col-sm-9">
+                        <textarea name="description" class="form-control" cols="50" rows="10"
+                                  id="description"><%= todo.description %></textarea>
+                    </div>
                 </div>
             </div>
-
-            <div class="form-group">
-                <label for="description" class="control-label col-sm-3">
-                    Description
-                </label>
-
-                <div class="col-sm-9">
-                    <textarea name="description"  class="form-control" cols="50" rows="10"
-                           id="description"><%= todo.description %></textarea>
-                </div>
-            </div>
-        </div>
             <div class="panel-footer">
-                <%if(todo.id){%>
+                <% if(todo.id){ %>
                 <input type="submit" name="update" class="save btn btn-primary" value="Update" id="create">
                 <a href="/todos/delete?id=<%= todo.id %>" class="btn btn-danger" name="cancel">Delete</a>
-                <%}else{%>
+                <% }else{ %>
                 <input type="submit" name="create" class="save btn btn-primary" value="Create" id="create">
-                <%}%>
+                <% } %>
 
             </div>
         </form>
