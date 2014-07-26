@@ -27,7 +27,16 @@ router.post('/save', function (req, res) {
     var id = req.param('id');
     if (id) {
         Todo.find(req.param('id')).on('success', function (todo) {
-
+            if(todo){
+                todo.updateAttributes({
+                    title: req.param('title'),
+                    description: req.param('description')
+                }).success(function() {
+                    res.redirect('/');
+                });
+            }else{
+                res.redirect('/');
+            }
         })
     } else {
         Todo.create(req.body).success(function () {
@@ -38,9 +47,14 @@ router.post('/save', function (req, res) {
 
 router.get('/delete', function (req, res) {
     Todo.find(req.param('id')).on('success', function (todo) {
-        todo.destroy().on('success', function (u) {
+        if(todo){
+            todo.destroy().on('success', function (u) {
+                res.redirect('/');
+            })
+        }else{
             res.redirect('/');
-        })
+        }
+
     })
 });
 
