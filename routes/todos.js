@@ -13,7 +13,7 @@ router.get('/create', function (req, res) {
     Todo.list(function (todos) {
         var id = req.param('id');
         if (id) {
-            Todo.find({id: id}).success(function (todo) {
+            Todo.find(id).success(function (todo) {
                 res.render('index', { title: 'Express', todos: todos, todo: todo});
             })
         } else {
